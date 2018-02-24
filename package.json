@@ -1,0 +1,24 @@
+{
+  "name": "hackthevalley",
+  "version": "1.0.0",
+  "description": "Sign language translator",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.16.2",
+    "request": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/its007Kevin/hackthevalley.git"
+  },
+  "author": "Kevin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/its007Kevin/hackthevalley/issues"
+  },
+  "homepage": "https://github.com/its007Kevin/hackthevalley#readme"
+}
