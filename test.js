@@ -1,58 +1,28 @@
-let req = require("request");
+const { spawn } = require('child_process');
+const request = require('request');
+const test = require('tape');
 
-const uri = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/00af33dc06fc46d98a7dc09ab23f7aac/execute?api-version=2.0&details=true";
-const apiKey = "rdZwjFNOlvAa5obV6uwzEeDVs0NM2KSZAnB/VjQVjwPWwG6xC1rUdxEHsZ+Ml/7nLhPGtFYvnN93s2Z80Nf1Eg==";
+// Start the app
+const env = Object.assign({}, process.env, {PORT: 5000});
+const child = spawn('node', ['index.js'], {env});
 
-let data = {
-	"Inputs": {
-	  "input1": {
-	    "ColumnNames": [
-	      "finger1",
-	      "finger2",
-	      "finger3",
-	      "finger4",
-	      "finger5",
-	      "label"
-	    ],
-	    "Values": [
-	      [
-	        "1",
-	        "1",
-	        "1",
-	        "1",
-	        "1",
-	        "value"
-	      ],
-	      [
-	        "1",
-	        "1",
-	        "1",
-	        "1",
-	        "1",
-	        "value"
-	      ]
-	    ]
-	  }
-	},
-	"GlobalParameters": {
-	   "Database server name": "gesturestraining.database.windows.net"
-	}
-}
+test('responds to requests', (t) => {
+  t.plan(4);
 
-const options = {
-    uri: uri,
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + apiKey,
-    },
-    body: JSON.stringify(data)
-}
+  // Wait until the server is ready
+  child.stdout.on('data', _ => {
+    // Make a request to our app
+    request('http://127.0.0.1:5000', (error, response, body) => {
+      // stop the server
+      child.kill();
 
-req(options, (err, res, body) => {
-    if (!err && res.statusCode == 200) {
-        console.log(body);
-    } else {
-        console.log("The request failed with status code: " + res.statusCode);
-    }
+      // No error
+      t.false(error);
+      // Successful response
+      t.equal(response.statusCode, 200);
+      // Assert content checks
+      t.notEqual(body.indexOf("<title>Node.js Getting Started on Heroku</title>"), -1);
+      t.notEqual(body.indexOf("Getting Started with Node on Heroku"), -1);
+    });
+  });
 });
