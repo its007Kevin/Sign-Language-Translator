@@ -3,26 +3,21 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
 	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700|Merriweather:400italic,400' rel='stylesheet' type='text/css'>
-
 	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
-	<script src="js/modernizr.js"></script> <!-- Modernizr -->
-
-
-
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="js/modernizr.js"></script> <!-- Modernizr -->
 	<script type="text/javascript">var NREUMQ=NREUMQ||[];NREUMQ.push(["mark","firstbyte",new Date().getTime()]);</script>
 	<script src="require.js"></script>
 	<script src="app.js"></script>
-	
-  	
+
+
 	<title>American Sign Language Tutor</title>
 </head>
 <body onload="init();">
 	<a class="cd-nav-trigger cd-text-replace" href="#primary-nav">Menu<span aria-hidden="true" class="cd-icon"></span></a>
-	
+
 	<div class="cd-projects-container">
 		<ul class="cd-projects-previews">
 			<li>
@@ -42,7 +37,7 @@
 					</div>
 				</a>
 			</li>
-			
+
 			<li>
 				<a href="#0">
 					<div class="cd-project-title">
@@ -51,7 +46,7 @@
 					</div>
 				</a>
 			</li>
-			
+
 			<li>
 				<a href="#0">
 					<div class="cd-project-title">
@@ -88,7 +83,7 @@
 						</script>
 
 						<p id="sign" style="font-size: 30px"></p>
-					</div> 
+					</div>
 			</li>
 
 			<li>
@@ -96,16 +91,54 @@
 					<div class="cd-project-title">
 						<h2>Learn</h2>
 						<p>Learn how to sign ASL words and letter and get real-time feedback!</p>
-					</div> 
+					</div>
 				</div>
 
 				<div class="cd-project-info">
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, quod dicta aliquid nemo repellendus distinctio minus dolor aperiam suscipit, ea enim accusantium, deleniti qui sequi sint nihil modi amet eligendi, quidem animi error labore voluptatibus sed. Qui magnam labore, iusto nostrum. Praesentium non, impedit accusantium consequatur officia architecto, mollitia placeat aperiam tenetur pariatur voluptatibus corrupti vitae deserunt! Nostrum non mollitia deserunt ipsam. Sunt quaerat natus cupiditate iure ipsa voluptatibus recusandae ratione vitae amet distinctio, voluptas, minus vero expedita ea fugit similique sit cumque ad id facere? Ab quas, odio neque quis ratione. Natus labore sit esse, porro placeat eum hic.
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, quod dicta aliquid nemo repellendus distinctio minus dolor aperiam suscipit, ea enim accusantium, deleniti qui sequi sint nihil modi amet eligendi, quidem animi error labore voluptatibus sed. Qui magnam labore, iusto nostrum. Praesentium non, impedit accusantium consequatur officia architecto, mollitia placeat aperiam tenetur pariatur voluptatibus corrupti vitae deserunt! Nostrum non mollitia deserunt ipsam. Sunt quaerat natus cupiditate iure ipsa voluptatibus recusandae ratione vitae amet distinctio, voluptas, minus vero expedita ea fugit similique sit cumque ad id facere? Ab quas, odio neque quis ratione. Natus labore sit esse, porro placeat eum hic.
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, quod dicta aliquid nemo repellendus distinctio minus dolor aperiam suscipit, ea enim accusantium, deleniti qui sequi sint nihil modi amet eligendi, quidem animi error labore voluptatibus sed. Qui magnam labore, iusto nostrum. Praesentium non, impedit accusantium consequatur officia architecto, mollitia placeat aperiam tenetur pariatur voluptatibus corrupti vitae deserunt! Nostrum non mollitia deserunt ipsam. Sunt quaerat natus cupiditate iure ipsa voluptatibus recusandae ratione vitae amet distinctio, voluptas, minus vero expedita ea fugit similique sit cumque ad id facere? Ab quas, odio neque quis ratione. Natus labore sit esse, porro placeat eum hic.
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, quod dicta aliquid nemo repellendus distinctio minus dolor aperiam suscipit, ea enim accusantium, deleniti qui sequi sint nihil modi amet eligendi, quidem animi error labore voluptatibus sed. Qui magnam labore, iusto nostrum. Praesentium non, impedit accusantium consequatur officia architecto, mollitia placeat aperiam tenetur pariatur voluptatibus corrupti vitae deserunt! Nostrum non mollitia deserunt ipsam. Sunt quaerat natus cupiditate iure ipsa voluptatibus recusandae ratione vitae amet distinctio, voluptas, minus vero expedita ea fugit similique sit cumque ad id facere? Ab quas, odio neque quis ratione. Natus labore sit esse, porro placeat eum hic.
-					</p>
+					<input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Ready to Practice</input>
+					<div id="main" style="visibility:hidden">
+					</div>
+					<script type="text/javascript">
+							if (!NREUMQ.f) { NREUMQ.f=function() {
+						NREUMQ.push(["load",new Date().getTime()]);
+						var e=document.createElement("script");
+						e.type="text/javascript";
+						e.src=(("http:"===document.location.protocol)?"http:":"https:") + "//" +
+							"js-agent.newrelic.com/nr-100.js";
+						document.body.appendChild(e);
+						if(NREUMQ.a)NREUMQ.a();
+						};
+						NREUMQ.a=window.onload;window.onload=NREUMQ.f;
+						};
+						NREUMQ.push(["nrfj","bam.nr-data.net","35bb71d9c5","1717595","JQ1aFhAMClhVEx4MVxE9UA0BFgtRXhVQFlsJDBsUCwYR",9,126,new Date().getTime(),"","","","",""]);
+					</script>
+
+					<p id="sign" style="font-size: 30px"></p>
+					<div>
+						<p style="text-align: center" id="label"></p>
+						<p style="text-align: center" id="content"></p>
+						<button onclick="changeImage()" id="next">Next</button>
+						<script>
+							var images = [["img/Hello.jpg", "Hello"], ["img/How.jpg", "How"], ["img/Are.jpg", "Are"]];
+							var index = 0;
+							function buildImage() {
+									var img = document.createElement('img')
+									img.src = images[index][0];
+									img.style.width = "400px";
+									img.style.height = "auto";
+									$('#label').html(images[index][1]);
+									$('#content').append(img);
+								}
+								function changeImage(){
+									var img = document.getElementById('content').getElementsByTagName('img')[0]
+									index++;
+									index = index % images.length; // This is for if this is the last image then goto first image
+									img.src = images[index][0];
+									$('#label').html(images[index][1]);
+								}
+								buildImage();
+						</script>
+					</div>
 				</div> <!-- .cd-project-info -->
 			</li>
 
@@ -114,7 +147,7 @@
 					<div class="cd-project-title">
 						<h2>Leaderboard</h2>
 						<p>See how your friends did!</p>
-					</div> 
+					</div>
 				</div>
 
 				<div class="cd-project-info">
@@ -132,7 +165,7 @@
 					<div class="cd-project-title">
 						<h2>About</h2>
 						<p>For more details</p>
-					</div> 
+					</div>
 				</div>
 
 				<div class="cd-project-info">

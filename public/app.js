@@ -20,7 +20,7 @@ function init() {
     var enableMessage = JSON.stringify({enableGestures: true});
     ws.send(enableMessage); // Enable gestures
     ws.send(JSON.stringify({focused: true})); // claim focus
-    
+
     focusListener = window.addEventListener('focus', function(e) {
         ws.send(JSON.stringify({focused: true})); // claim focus
      });
@@ -28,7 +28,7 @@ function init() {
     blurListener = window.addEventListener('blur', function(e) {
          ws.send(JSON.stringify({focused: false})); // relinquish focus
      });
-     
+
     //document.getElementById("main").style.visibility = "visible";
     //document.getElementById("connection").innerHTML = "WebSocket connection open!";
   };
@@ -79,6 +79,8 @@ function init() {
           }
         };
 
+        console.log(JSON.stringify(data));
+
 			  var serviceUrl = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/e7a7951381034df3afca492240a74ebb/execute?api-version=2.0&details=true";
 
   		  $.ajax({
@@ -90,12 +92,19 @@ function init() {
             var result = JSON.parse(data);
             console.log(result);
             var word = result.Results.output1.value.Values[1][724];
+            if (word === $('#label').html()) {
+              alert("Nice!");
+              $('#next').onClick();
+            } else {
+              alert("Incorrect!");
+            }
+
             console.log(word);
             document.getElementById("sign").innerHTML = word;
             $.ajax({
               type: "POST",
               url: "http://localhost:5000/speech",
-              //data: {"text": "hello world"}, 
+              //data: {"text": "hello world"},
               data: JSON.stringify({"text": word}),
               contentType: 'application/json'
             }).done(function (data) {
