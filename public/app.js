@@ -77,22 +77,32 @@ function init() {
           "GlobalParameters": {
              "Database server name": "gesturestraining.database.windows.net"
           }
-        }
+        };
 
 			  var serviceUrl = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/e7a7951381034df3afca492240a74ebb/execute?api-version=2.0&details=true";
 
-		  $.ajax({
-          type: "POST",
-          url: "http://localhost:5000/data",
-          data: JSON.stringify(data),
-          contentType: 'application/json'
-      }).done(function (data) {
-          var result = JSON.parse(data);
-          console.log(result);
-          console.log(result.Results.output1.value.Values[1][724]);
-      });
-      togglePause();
-			}
+  		  $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/data",
+            data: JSON.stringify(data),
+            contentType: 'application/json'
+        }).done(function (data) {
+            var result = JSON.parse(data);
+            console.log(result);
+            var word = result.Results.output1.value.Values[1][724];
+            console.log(word);
+            $.ajax({
+              type: "POST",
+              url: "http://localhost:5000/speech",
+              //data: {"text": "hello world"}, 
+              data: JSON.stringify({"text": word}),
+              contentType: 'application/json'
+            }).done(function (data) {
+              console.log("Done");
+            });
+        });
+          togglePause();
+  		}
     }
   };
 
