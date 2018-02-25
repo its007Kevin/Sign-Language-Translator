@@ -56,8 +56,8 @@ app.post('/speech', (req,res)=>{
         .att('xml:lang', 'en-us')
         .ele('voice')
         .att('xml:lang', 'en-us')
-        .att('xml:gender', 'Male')
-        .att('name', 'Microsoft Server Speech Text to Speech Voice (en-US, BenjaminRUS)')
+        .att('xml:gender', 'Female')
+        .att('name', 'Microsoft Server Speech Text to Speech Voice (en-US, JessaRUS)')
         .txt(req.body.text)
         .end();
 
