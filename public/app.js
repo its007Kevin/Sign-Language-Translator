@@ -94,9 +94,33 @@ function init() {
             console.log(result);
             var word = result.Results.output1.value.Values[1][result.Results.output1.value.Values[1].length - 1];
             if (word === $('#label').html()) {
-              alert("Nice!");
+              // $.ajax({
+              //   type: "POST",
+              //   url: "http://localhost:5000/speech",
+              //   //data: {"text": "hello world"},
+              //   data: JSON.stringify({"text": "Correct!"}),
+              //   contentType: 'application/json'
+              // }).done(function (data) {
+              //   console.log("Done");
+              // });
+              $('#message').html("That's Correct!");
+              setTimeout(function () {
+                  $('#message').html("");
+              }, 3000);
             } else {
-              alert("Incorrect!");
+              // $.ajax({
+              //   type: "POST",
+              //   url: "http://localhost:5000/speech",
+              //   //data: {"text": "hello world"},
+              //   data: JSON.stringify({"text": "Sorry, that's incorrect"}),
+              //   contentType: 'application/json'
+              // }).done(function (data) {
+              //   console.log("Done");
+              // });
+              $('#message').html("Sorry, thats incorrect");
+              setTimeout(function () {
+                  $('#message').html("");
+              }, 3000);
             }
             console.log(word);
             document.getElementById("sign").innerHTML = word;

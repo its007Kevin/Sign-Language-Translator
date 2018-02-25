@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700|Merriweather:400italic,400' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -67,6 +68,7 @@
 						<div style="display: none">
 							<input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()" checked>Ready to Practice</input>
 						</div>
+						<div id="messages"></div>
 						<script type="text/javascript">
 							pauseForGestures();
 						</script>
@@ -106,27 +108,31 @@
 					<script type="text/javascript">
 						pauseForGestures();
 					</script>
+					<p id="message" style="text-align: center; font-size: 200%; color: black; font-weight: bold"></p>
 					<div id="main" style="visibility:hidden">
 					</div>
 
-					<p id="sign" style="font-size: 30px"></p>
+					<p id="sign"></p>
 					<div>
-						<p style="text-align: center" id="label"></p>
+						<p style="font-size: 200%; color: black; font-weight: bold; text-align: center" id="label"></p>
 						<p style="text-align: center" id="content"></p>
-						<button onclick="changeImage()" id="next">Next</button>
-						<script>
+						<p style="text-align: center">
+							<button type="button" onclick="changeImage()" id="next" class="btn btn-light btn-lg">Next</button>
+						</p>
+						<script type="text/javascript">
 							var images = [["img/Hello.jpg", "Hello"], ["img/How.jpg", "How"], ["img/Are.jpg", "Are"], ["img/Love.jpg", "Love"], ["img/You.jpg", "You"], ["img/Sign.jpg", "Sign"]];
 							var index = 0;
 							function buildImage() {
 									var img = document.createElement('img')
 									img.src = images[index][0];
-									img.style.width = "400px";
+									img.style.width = "800px";
 									img.style.height = "auto";
 									$('#label').html(images[index][1]);
 									$('#content').append(img);
 								}
 								function changeImage(){
-									var img = document.getElementById('content').getElementsByTagName('img')[0]
+									var img = document.getElementById('content').getElementsByTagName('img')[0];
+									console.log(img);
 									index++;
 									index = index % images.length; // This is for if this is the last image then goto first image
 									img.src = images[index][0];
