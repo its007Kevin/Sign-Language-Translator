@@ -29,8 +29,8 @@ function init() {
          ws.send(JSON.stringify({focused: false})); // relinquish focus
      });
      
-    document.getElementById("main").style.visibility = "visible";
-    document.getElementById("connection").innerHTML = "WebSocket connection open!";
+    //document.getElementById("main").style.visibility = "visible";
+    //document.getElementById("connection").innerHTML = "WebSocket connection open!";
   };
 
   // On message received
@@ -39,9 +39,9 @@ function init() {
       var obj = JSON.parse(event.data);
       var str = JSON.stringify(obj, undefined, 2);
       if(!obj.id){
-          document.getElementById("eventoutput").innerHTML = '<pre>' + str + '</pre>';
+          //document.getElementById("eventoutput").innerHTML = '<pre>' + str + '</pre>';
       } else {
-          document.getElementById("frameoutput").innerHTML = '<pre>' + str + '</pre>';
+          //document.getElementById("frameoutput").innerHTML = '<pre>' + str + '</pre>';
       }
       if (pauseOnGesture && obj.gestures.length > 0) {
 				obj["pointables"][0]["GlobalParameters"] = {
@@ -91,6 +91,7 @@ function init() {
             console.log(result);
             var word = result.Results.output1.value.Values[1][724];
             console.log(word);
+            document.getElementById("sign").innerHTML = word;
             $.ajax({
               type: "POST",
               url: "http://localhost:5000/speech",
@@ -125,14 +126,14 @@ function togglePause() {
   paused = !paused;
 
   if (paused) {
-    document.getElementById("pause").innerText = "Resume";
+    //document.getElementById("pause").innerText = "Resume";
     ws.send(JSON.stringify({focused: false})); // relinquish focus
     setTimeout(function () {
       console.log("Ready for next input");
         togglePause();
     }, 1500);
   } else {
-    document.getElementById("pause").innerText = "Pause";
+    //document.getElementById("pause").innerText = "Pause";
     ws.send(JSON.stringify({focused: true})); // request focus
   }
 }
