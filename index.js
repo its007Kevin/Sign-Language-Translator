@@ -13,9 +13,8 @@ app.use(cors())
 
 app.post('/data', (req,res)=>{
 
-	const uri = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/00af33dc06fc46d98a7dc09ab23f7aac/execute?api-version=2.0&details=true";
-	const apiKey = "rdZwjFNOlvAa5obV6uwzEeDVs0NM2KSZAnB/VjQVjwPWwG6xC1rUdxEHsZ+Ml/7nLhPGtFYvnN93s2Z80Nf1Eg==";
-	console.log(req.body)
+	const uri = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/e7a7951381034df3afca492240a74ebb/execute?api-version=2.0&details=true";
+	const apiKey = "BUyh0/TCe36SxUplo4wNpQuJG8JnyLG373KTT55o9ZjXGCp1b/ljfkFOProCdk/TZs/GEBs5MfTffK3CxfPiGg==";
 	const options = {
 	    uri: uri,
 	    method: "POST",
@@ -31,7 +30,7 @@ app.post('/data', (req,res)=>{
         console.log(body);
       	res.send(body);
     } else {
-    		console.log(err)
+    		console.log(err);
         console.log("The request failed with status code: " + response.statusCode);
     }
 	});

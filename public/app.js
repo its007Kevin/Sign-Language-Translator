@@ -40,70 +40,38 @@ function init() {
       var str = JSON.stringify(obj, undefined, 2);
       if(!obj.id){
           document.getElementById("eventoutput").innerHTML = '<pre>' + str + '</pre>';
-          console.log(str);
       } else {
           document.getElementById("frameoutput").innerHTML = '<pre>' + str + '</pre>';
       }
       if (pauseOnGesture && obj.gestures.length > 0) {
-				obj["GlobalParameters"] = {
+				obj["pointables"][0]["GlobalParameters"] = {
 					"Database server name": "gesturestraining.database.windows.net"
 				}
-				console.log(parse(obj));
 
-				// let req = require("request");
+        obj["pointables"][0]["Answer"] = "";
 
-				const uri = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/00af33dc06fc46d98a7dc09ab23f7aac/execute?api-version=2.0&details=true";
-				const apiKey = "rdZwjFNOlvAa5obV6uwzEeDVs0NM2KSZAnB/VjQVjwPWwG6xC1rUdxEHsZ+Ml/7nLhPGtFYvnN93s2Z80Nf1Eg==";
+				const uri = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/e7a7951381034df3afca492240a74ebb/execute?api-version=2.0&details=true";
+				const apiKey = "BUyh0/TCe36SxUplo4wNpQuJG8JnyLG373KTT55o9ZjXGCp1b/ljfkFOProCdk/TZs/GEBs5MfTffK3CxfPiGg==";
 
-				// let data = parse(obj);
+        var preData = filter(obj);
+        var columnNames = [];
+        for (var key in preData) {
+          if (key === "d0_GlobalParameters_Database server name") {
+            columnNames.push("d0_GlobalParameters_Database_server_name")
+          } else {
+            columnNames.push(key.toString());
+          }
+        }
+        var values = [];
+        for (var key in preData) {
+          values.push(preData[key].toString());
+        }
 
-				// const options = {
-				//     uri: uri,
-				//     method: "POST",
-				//     headers: {
-				//         "Content-Type": "application/json",
-				//         "Authorization": "Bearer " + apiKey,
-				//     },
-				//     body: JSON.stringify(data)
-				// }
-
-				// req(options, (err, res, body) => {
-				//     if (!err && res.statusCode == 200) {
-				//         console.log(body);
-				//     } else {
-				//         console.log("The request failed with status code: " + res.statusCode);
-				//     }
-				// });
-
-        let hardCode = {
+        let data = {
           "Inputs": {
             "input1": {
-              "ColumnNames": [
-                "finger1",
-                "finger2",
-                "finger3",
-                "finger4",
-                "finger5",
-                "label"
-              ],
-              "Values": [
-                [
-                  "1",
-                  "1",
-                  "1",
-                  "1",
-                  "1",
-                  "value"
-                ],
-                [
-                  "1",
-                  "1",
-                  "1",
-                  "1",
-                  "1",
-                  "value"
-                ]
-              ]
+              "ColumnNames": columnNames,
+              "Values": [ values, values ]
             }
           },
           "GlobalParameters": {
@@ -111,19 +79,19 @@ function init() {
           }
         }
 
-		    var ajaxData = parse(obj);
-			  var serviceUrl = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/00af33dc06fc46d98a7dc09ab23f7aac/execute?api-version=2.0&details=true";
+			  var serviceUrl = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/e7a7951381034df3afca492240a74ebb/execute?api-version=2.0&details=true";
 
-			  $.ajax({
-			      type: "POST",
-			      url: "http://localhost:5000/data",
-			      data: JSON.stringify(hardCode),
-            // dataType: 'json',
-            contentType: 'application/json'
-			  }).done(function (data) {
-			      console.log(JSON.parse(data));
-			  });
-				togglePause();
+		  $.ajax({
+          type: "POST",
+          url: "http://localhost:5000/data",
+          data: JSON.stringify(data),
+          contentType: 'application/json'
+      }).done(function (data) {
+          var result = JSON.parse(data);
+          console.log(result);
+          console.log(result.Results.output1.value.Values[1][724]);
+      });
+      togglePause();
 			}
     }
   };
@@ -149,6 +117,10 @@ function togglePause() {
   if (paused) {
     document.getElementById("pause").innerText = "Resume";
     ws.send(JSON.stringify({focused: false})); // relinquish focus
+    setTimeout(function () {
+      console.log("Ready for next input");
+        togglePause();
+    }, 1500);
   } else {
     document.getElementById("pause").innerText = "Pause";
     ws.send(JSON.stringify({focused: true})); // request focus
@@ -163,9 +135,49 @@ function pauseForGestures() {
   }
 }
 
-function parse(object) {
-	['devices', 'interactionBox', 'timestamp', 'gestures', 'pointables', 'currentFrameR'].forEach(function (key) {
-		delete object[key];
-	});
-	return object;
+function filter(json) {
+  var fingers = json["pointables"];
+  for (var i = 0; i < fingers.length; i++) {
+    ["touchZone", "tool", "tipVelocity"].forEach (function (key) {
+      delete fingers[i][key];
+    });
+  }
+  var hands = json["hands"];
+  for (var i = 0; i < hands.length; i++) {
+    ["elbow", "armBasis", "armWidth", "id", "palmVelocity", "r", "s", "t", "wrist", "sphereRadius", "sphereCenter"].forEach (function (key) {
+      delete hands[i][key];
+    });
+  }
+  result = fingers.concat(hands);
+  var flatten = Object.flatten(result);
+  for (var key in flatten) {
+    var temp = flatten[key];
+    flatten["d" + key] = temp;
+    delete flatten[key];
+  }
+  return flatten;
+}
+
+Object.flatten = function(data) {
+  var result = {};
+  function recurse (cur, prop) {
+      if (Object(cur) !== cur) {
+          result[prop] = cur;
+      } else if (Array.isArray(cur)) {
+           for(var i=0, l=cur.length; i<l; i++)
+               recurse(cur[i], prop +  i);
+          if (l == 0)
+              result[prop] = [];
+      } else {
+          var isEmpty = true;
+          for (var p in cur) {
+              isEmpty = false;
+              recurse(cur[p], prop ? prop+"_"+p : p);
+          }
+          if (isEmpty && prop)
+              result[prop] = {};
+      }
+  }
+  recurse(data, "");
+  return result;
 }
