@@ -18,8 +18,8 @@ app.use(cors())
 
 app.post('/data', (req,res)=>{
 
-	const uri = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/e7a7951381034df3afca492240a74ebb/execute?api-version=2.0&details=true";
-	const apiKey = "BUyh0/TCe36SxUplo4wNpQuJG8JnyLG373KTT55o9ZjXGCp1b/ljfkFOProCdk/TZs/GEBs5MfTffK3CxfPiGg==";
+	const uri = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/df80f7d9955d43a19b46e14ddf58c5d0/execute?api-version=2.0&details=true";
+	const apiKey = "NdcZrWX6QHjm2OuO3ENQE4mSzZ4vrOfHbSvo8dDoHSNUztIK6zB/30xO67YP9gtMyOEKgfKGxanXb6yKSATCzA==";
 	const options = {
 	    uri: uri,
 	    method: "POST",

@@ -48,12 +48,13 @@ function init() {
 					"Database server name": "gesturestraining.database.windows.net"
 				}
 
-        obj["pointables"][0]["Answer"] = "";
+        obj["pointables"][0]["Answer"] = "Love";
 
-				const uri = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/e7a7951381034df3afca492240a74ebb/execute?api-version=2.0&details=true";
-				const apiKey = "BUyh0/TCe36SxUplo4wNpQuJG8JnyLG373KTT55o9ZjXGCp1b/ljfkFOProCdk/TZs/GEBs5MfTffK3CxfPiGg==";
+				const uri = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/df80f7d9955d43a19b46e14ddf58c5d0/execute?api-version=2.0&details=true";
+				const apiKey = "NdcZrWX6QHjm2OuO3ENQE4mSzZ4vrOfHbSvo8dDoHSNUztIK6zB/30xO67YP9gtMyOEKgfKGxanXb6yKSATCzA==";
 
         var preData = filter(obj);
+        console.log(JSON.stringify(preData));
         var columnNames = [];
         for (var key in preData) {
           if (key === "d0_GlobalParameters_Database server name") {
@@ -67,6 +68,7 @@ function init() {
           values.push(preData[key].toString());
         }
 
+
         let data = {
           "Inputs": {
             "input1": {
@@ -79,7 +81,7 @@ function init() {
           }
         };
 
-			  var serviceUrl = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/e7a7951381034df3afca492240a74ebb/execute?api-version=2.0&details=true";
+			  var serviceUrl = "https://ussouthcentral.services.azureml.net/workspaces/1525c34bf7ef4e7f87756b0615129f13/services/df80f7d9955d43a19b46e14ddf58c5d0/execute?api-version=2.0&details=true";
 
   		  $.ajax({
             type: "POST",
@@ -89,7 +91,7 @@ function init() {
         }).done(function (data) {
             var result = JSON.parse(data);
             console.log(result);
-            var word = result.Results.output1.value.Values[1][724];
+            var word = result.Results.output1.value.Values[1][result.Results.output1.value.Values[1].length - 1];
             console.log(word);
             document.getElementById("sign").innerHTML = word;
             $.ajax({
