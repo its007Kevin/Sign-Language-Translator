@@ -1,6 +1,6 @@
 # Sign Language Translator
 
-#### [Winner of Best use of Microsoft Services at Hack the Valley 2](https://hackvalley2.hackerearth.com/#prizes)
+#### :trophy: [ Winner of Best use of Microsoft Services at Hack the Valley 2](https://hackvalley2.hackerearth.com/#prizes) :trophy:
 
 A sign language translator and Tutor on the web.
 
