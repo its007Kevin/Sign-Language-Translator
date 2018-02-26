@@ -8,6 +8,8 @@ Plug in your [Leap Motion](https://www.leapmotion.com) and start learning sign l
 
 [Video Demo](https://www.youtube.com/watch?v=rRduMu7rdII)
 
+![](https://github.com/its007Kevin/Sign-Language-Translator/blob/master/2018-02-26_16-42-40.png)
+
 ## Running Locally
 
 Make sure you have [Node.js](http://nodejs.org/) and the [Leap Motion Drivers](https://www.leapmotion.com/setup/desktop/windows) installed.
