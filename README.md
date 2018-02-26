@@ -28,8 +28,14 @@ The app should now be running on [localhost:5000](http://localhost:5000/).
 ## Technicalities
 
 Developed on Windows 10
+
 [Node JS v8.9.4](https://nodejs.org/en/)
+
 [Express Framework](https://expressjs.com/)
+
 [SQL Server 2017 Express](https://www.microsoft.com/en-ca/sql-server/sql-server-editions-express)
+
 [Microsoft Azure Machine Learning](https://azure.microsoft.com/en-us/services/machine-learning-studio/)
+
+[Bing Text to Speech](https://azure.microsoft.com/en-us/services/cognitive-services/speech/)
 
